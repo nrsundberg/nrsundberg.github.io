@@ -49,3 +49,9 @@ h1 {
 .nav-button {
   color: #F0F8FF;
 }
+
+.project-list {
+  color: #F6F8FF;
+  list-style: none;
+  text-align: center;
+}
