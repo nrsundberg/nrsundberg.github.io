@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    background-image: url("https://nrsundberg.github.io/Images/background.jpg");
+    background-position: center;
 }
 .header {
     background-color: grey;
