@@ -1,3 +1,6 @@
+body {
+    margin: 0;
+}
 .header {
     background-color: grey;
     height: 70px;
@@ -5,6 +8,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .page-selection a {
@@ -17,6 +21,7 @@
 
 .socials a {
     text-decoration: none;
+    align-items: right;
 }
 
 .socials img {
