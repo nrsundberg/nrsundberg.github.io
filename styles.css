@@ -111,3 +111,10 @@ body {
     opacity: 1;
     padding: 60px;
 }
+
+.footer {
+    text-decoration: none;
+    font: normal normal 600 25px/53px Segoe UI;
+    color: var(--darker-green);
+    justify-content: space-between;
+}
