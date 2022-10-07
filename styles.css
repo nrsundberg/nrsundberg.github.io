@@ -75,9 +75,9 @@ body {
     box-shadow: 0 1vh 3vh #112031;
     border-radius: 7vh;
     display: flex;
-    height: 56vh;
+    max-height: 56vh;
     flex-direction: column;
-    width: 42vh;
+    max-width: 42vh;
     padding: 1.5rem;
     opacity: 1;
 }
@@ -106,8 +106,8 @@ body {
     border-radius: 7vh;
     align-self: center;
     margin-top: 23vh;
-    height: 19vh;
-    width: 30vh;
+    max-height: 19vh;
+    max-width: 30vh;
     opacity: 1;
     padding: 7vh;
 }
@@ -133,8 +133,8 @@ body {
 }
 .socials-item img {
     padding-top: 2vh;
-    height: 9vh;
-    width: 9vh;
+    max-height: 9vh;
+    max-width: 9vh;
     padding-right: 2vh;
     text-decoration: none;
 }
@@ -147,8 +147,8 @@ body {
     justify-content: left;
 }
 .noah-picture img {
-    width: 37vh;
-    height: 37vh;
+    max-width: 37vh;
+    max-height: 37vh;
     padding-right: 12vh;
     border-right-style: solid;
     border-right-color: var(--darker-green);
