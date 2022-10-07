@@ -44,7 +44,7 @@ body {
 }
 .page-selection a {
     color: var(--darker-green);
-    font: normal normal 600 25px/53px Segoe UI;
+    font: normal normal 600 3vh/6vh Segoe UI;
     letter-spacing: 0;
     text-align: left;
     text-decoration: none;
@@ -72,8 +72,8 @@ body {
 
 .project-box {
     background: var(--lighter-green) 0 0 no-repeat padding-box;
-    box-shadow: 0 4px 20px #112031;
-    border-radius: 59px;
+    box-shadow: 0 1vh 3vh #112031;
+    border-radius: 7vh;
     display: flex;
     height: 56vh;
     flex-direction: column;
@@ -117,6 +117,7 @@ body {
     justify-content: space-around;
     margin-top: 10%;
     background-color: var(--darker-green);
+    width: 100%;
 }
 .footer a {
     font: normal normal 600 3vh/6vh Segoe UI;
