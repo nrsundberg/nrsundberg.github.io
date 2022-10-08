@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="mobile fix -- better box">
-      <change beforePath="$PROJECT_DIR$/Images/GitHub_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Images/LinkedIn_logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="footer fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +59,8 @@
       <workItem from="1665168591414" duration="1133000" />
       <workItem from="1665170770153" duration="815000" />
       <workItem from="1665171613983" duration="125000" />
-      <workItem from="1665231122513" duration="321000" />
+      <workItem from="1665231122513" duration="561000" />
+      <workItem from="1665231870858" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <created>1665152843788</created>
@@ -113,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665171728853</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="footer fix">
+      <created>1665231666380</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1665231666380</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +140,7 @@
     <MESSAGE value="email fix" />
     <MESSAGE value="mobile fix test" />
     <MESSAGE value="mobile fix -- better box" />
-    <option name="LAST_COMMIT_MESSAGE" value="mobile fix -- better box" />
+    <MESSAGE value="footer fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="footer fix" />
   </component>
 </project>
