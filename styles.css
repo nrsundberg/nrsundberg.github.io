@@ -2,7 +2,8 @@
     --darker-green: #6DCD8E;
     --lighter-green: #D4ECDD;
     --header-font-type: normal normal bold 7vh/15vh Segoe UI;;
-    --box-font-type: normal normal bold 3vh/0 Segoe UI;;
+    --box-font-type: normal normal bold 3vh/0 Segoe UI;
+    --normal-font: normal normal bold 3vh/3vh Segoe UI;
 }
 body {
     background-color: #112031;
@@ -120,16 +121,17 @@ body {
     width: 100%;
 }
 .footer a {
-    font: normal normal 600 3vh/6vh Segoe UI;
-    color: var(--lighter-green);
+    font: var(--normal-font);
+    color: #112031;
     text-decoration: underline;
-    text-decoration-color: var(--lighter-green);
+    text-decoration-color: #112031;
 }
 .socials-item {
     text-align: right;
 }
 .professional-link a {
     display: grid;
+    padding-top: 2vh;
 }
 .socials-item img {
     padding-top: 2vh;
@@ -156,7 +158,7 @@ body {
 
 .about-me-text {
     padding-left: 12vh;
-    font-size: 3vh;
+    font: var(--normal-font);
     color: var(--lighter-green);
 
 }
