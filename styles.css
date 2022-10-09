@@ -24,6 +24,23 @@ body {
     overflow: hidden;
     width: 100%;
 }
+.page-selection {
+    margin-right: 3%;
+    display: flex;
+}
+.page-selection a {
+    color: var(--darker-green);
+    font: normal normal 600 3vh/6vh Segoe UI;
+    letter-spacing: 0;
+    text-align: left;
+    text-decoration: none;
+    padding: 0 2vh;
+}
+.page-selection a:hover {
+    color: var(--lighter-green);
+    text-decoration: underline var(--lighter-green) wavy;
+    transform: translateY(-2%);
+}
 .summary-info {
     height: 75vh;
     margin-top: 20%;
@@ -45,18 +62,7 @@ body {
     justify-content: left;
     letter-spacing: 0;
 }
-.page-selection {
-    margin-right: 3%;
-    display: flex;
-}
-.page-selection a {
-    color: var(--darker-green);
-    font: normal normal 600 3vh/6vh Segoe UI;
-    letter-spacing: 0;
-    text-align: left;
-    text-decoration: none;
-    padding: 0 2vh;
-}
+
 .projects-section{
     margin-top: 10%;
     margin-bottom: 5%;

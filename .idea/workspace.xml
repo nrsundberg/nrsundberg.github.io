@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="footer fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-    </list>
+    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="var changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +59,7 @@
       <workItem from="1665171613983" duration="125000" />
       <workItem from="1665231122513" duration="561000" />
       <workItem from="1665231870858" duration="5000" />
-      <workItem from="1665321013620" duration="3772000" />
+      <workItem from="1665321013620" duration="3998000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <created>1665152843788</created>
@@ -121,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665231666380</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="var changes">
+      <created>1665325506797</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665325506797</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +147,7 @@
     <MESSAGE value="mobile fix test" />
     <MESSAGE value="mobile fix -- better box" />
     <MESSAGE value="footer fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="footer fix" />
+    <MESSAGE value="var changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="var changes" />
   </component>
 </project>
