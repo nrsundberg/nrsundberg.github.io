@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="var changes" />
+    <list default="true" id="d00a0b5e-7ff1-45d5-b6ca-0897c2fe2d55" name="Changes" comment="hover wavy" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +60,7 @@
       <workItem from="1665231122513" duration="561000" />
       <workItem from="1665231870858" duration="5000" />
       <workItem from="1665321013620" duration="3998000" />
+      <workItem from="1665350242325" duration="202000" />
     </task>
     <task id="LOCAL-00001" summary="change">
       <created>1665152843788</created>
@@ -124,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665325506797</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="hover wavy">
+      <created>1665350437046</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1665350437046</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +156,7 @@
     <MESSAGE value="mobile fix -- better box" />
     <MESSAGE value="footer fix" />
     <MESSAGE value="var changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="var changes" />
+    <MESSAGE value="hover wavy" />
+    <option name="LAST_COMMIT_MESSAGE" value="hover wavy" />
   </component>
 </project>

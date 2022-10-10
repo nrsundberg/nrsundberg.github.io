@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --darker-green: #6DCD8E;
     --lighter-green: #D4ECDD;
