@@ -3,6 +3,7 @@
 }
 
 :root {
+    font-size: 10px;
     --darker-green: #6DCD8E;
     --lighter-green: #D4ECDD;
     --header-font-type: normal normal bold 7vh/15vh Segoe UI;
@@ -134,9 +135,9 @@ body {
     justify-content: left;
 }
 .noah-picture img {
-    width: 37vh;
-    height: 37vh;
-    padding-right: 12vh;
+    max-width: 50rem;
+    max-height: 50rem;
+    padding-right: 10rem;
     border-right-style: solid;
     border-right-color: var(--darker-green);
 }
