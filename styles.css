@@ -112,10 +112,10 @@ body {
 }
 .about {
     grid-area: about;
-    height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 300px 1fr;
+    margin-bottom: 10vh;
     margin-top: 15vh;
 }
 #about {
