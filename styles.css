@@ -124,8 +124,7 @@ body {
 .project-box {
     background: var(--lighter-green);
     max-height: 600px;
-    min-height: 350px;
-    height: 35vh;
+    height: 45vw;
     min-width: 200px;
     width: 35vw;
     border-radius: 5vw;
