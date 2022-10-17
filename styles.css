@@ -6,7 +6,7 @@
     --background-color: #112031;
     --darker-green: #6DCD8E;
     --lighter-green: #D4ECDD;
-    --header-font-type: normal normal bold 2.7vw/2.5vw Segoe UI;
+    --header-font-type: normal normal bold 23px/30px Segoe UI;
     --large-font-type: normal normal bold 7vw/7vw Segoe UI;
     --box-font-type: normal normal bold 3rem/0 Segoe UI;
     --normal-font: normal normal bold 2.4vw Segoe UI;
@@ -133,7 +133,6 @@ body {
 .project-box:hover {
     transform: translateY(-5%);
 }
-
 .box-title {
     align-items: end;
     justify-content: center;
@@ -142,6 +141,43 @@ body {
     display: flex;
     font: var(--normal-font);
     height: 5vw;
+}
+.box-about {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+        "text"
+        "photo";
+    justify-content: center;
+    height: 35vw;
+    align-items: end;
+    max-height: 470px;
+}
+.box-text {
+    align-self: flex-start;
+    color: var(--background-color);
+    font: var(--box-font-type);
+    grid-area: text;
+    margin-top: 4vh;
+}
+.box-image {
+    grid-area: photo;
+}
+.box4 img {
+    height: 21.79vw;
+    width: 30vw;
+}
+.box3 img {
+    height: 14.49vw;
+    width: 30vw;
+}
+.box1 img {
+    height: 13.45vw;
+    width: 30vw;
+}
+.box2 img {
+    height: 9.68vw;
+    width: 30vw;
 }
 .headshot {
     grid-column: 1;
