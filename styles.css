@@ -131,8 +131,13 @@ body {
     border-radius: 5vw;
     box-shadow: 0 1vh 3vh #112031;
 }
-.project-box:hover {
-    transform: translateY(-5%);
+.projects:hover > div {
+    filter: brightness(.5);
+}
+.projects > div:hover {
+    filter: brightness(1);
+    z-index: 1;
+    transform: translateY(-3%)
 }
 .box-title {
     align-items: end;
