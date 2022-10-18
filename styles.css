@@ -10,6 +10,7 @@
     --large-font-type: normal normal bold 7vw/7vw Segoe UI;
     --box-font-type: normal normal bold 3rem/0 Segoe UI;
     --normal-font: normal normal bold 2.4vw Segoe UI;
+    --box-about-font: bold 15px Segoe UI;
 }
 body {
     background-color: var(--background-color);
@@ -154,17 +155,18 @@ body {
     max-height: 470px;
 }
 .box-text {
-    align-self: flex-start;
+    margin: 2%;
     color: var(--background-color);
-    font: var(--box-font-type);
+    font: var(--box-about-font);
     grid-area: text;
     margin-top: 4vh;
 }
 .box-image {
     grid-area: photo;
+    justify-self: center;
 }
 .box4 img {
-    height: 21.79vw;
+    height: 16.76vw;
     width: 30vw;
 }
 .box3 img {
