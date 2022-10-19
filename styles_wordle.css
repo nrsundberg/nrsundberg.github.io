@@ -5,18 +5,33 @@
     --white: #FBFCFF;
     --raisin-black: #242325;
     --celtic-blue: #266DD3;
+    --header-font: bold 30px Tahoma;
+    --nav-font: bold 12px Tahoma;
+    --footer-font: bold 22px/15px Tahoma;
 }
 body {
     margin: 0 0;
 }
 header {
-    align-items: center;
+    align-content: center;
     background-color: var(--raisin-black);
-    display: flex;
-    height: 6vh;
-    justify-content: right;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 8vh;
     position: absolute;
     width: 100%;
+}
+.game-title{
+    color: var(--white);
+    justify-self: center;
+    font: var(--header-font);
+    grid-column: 2;
+}
+.game-interaction {
+    align-items: center;
+    display: flex;
+    grid-column: 3;
+    justify-content: end;
 }
 .help-question-mark {
     width: 5vh;
@@ -24,15 +39,43 @@ header {
     margin-right: 2vw;
 }
 .new-game {
-    height: 3vh;
-    width: 5vh;
+    background-color: var(--white);
+    border-radius: 2vh;
+    color: var(--raisin-black);
+    height: 4vh;
+    font: var(--nav-font);
     margin-right: 3vh;
+    width: 100px;
 }
-
-
-
-
-
+.full-board-area {
+    display: flex;
+    padding-top: 12vh;
+    margin: 0 5vw;
+    margin-bottom: 10vh;
+    justify-content: center;
+}
+.game-area {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 5px;
+    margin-bottom: 5vh;
+}
+.row-1 { grid-row: 1;}
+.row-2 { grid-row: 2;}
+.row-3 { grid-row: 3;}
+.row-4 { grid-row: 4;}
+.row-5 { grid-row: 5;}
+.row-6 { grid-row: 6;}
+.row {
+    column-gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.letter {
+    border: solid var(--raisin-black);
+    width: 75px;
+    height: 75px;
+}
 footer {
     background-color: var(--raisin-black);
     bottom: 0;
@@ -41,8 +84,9 @@ footer {
     justify-content: space-between;
     height: 10vh;
     margin: 0 0;
-    padding: 3vh;
-    position:absolute;
+    padding-right: 3vh;
+    padding-left: 3vh;
+    position: fixed;
     width: 100%;
 }
 .professional-link {
@@ -53,6 +97,7 @@ footer {
 }
 .professional-link a {
     color: var(--white);
+    font: var(--footer-font);
     text-decoration: underline;
 }
 .professional-link a:hover {
@@ -67,7 +112,7 @@ footer {
     text-decoration: none;
 }
 .socials img {
-    height: 15vw;
+    height: 7.5vh;
     max-height: 75px;
     padding-right: 2vw;
 }
