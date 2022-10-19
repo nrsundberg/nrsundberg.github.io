@@ -31,7 +31,6 @@ header a {
 }
 header a:hover {
     color: var(--mint-green);
-    text-shadow: 0 2px 10px var(--white);
 }
 .main-picture {
     align-items: center;
