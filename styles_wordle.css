@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --white: #FBFCFF;
+    --raisin-black: #242325;
+    --celtic-blue: #266DD3;
+}
+body {
+    margin: 0 0;
+}
+header {
+    align-items: center;
+    background-color: var(--raisin-black);
+    display: flex;
+    height: 6vh;
+    justify-content: right;
+    position: absolute;
+    width: 100%;
+}
+.help-question-mark {
+    width: 5vh;
+    height: 5vh;
+    margin-right: 2vw;
+}
+.new-game {
+    height: 3vh;
+    width: 5vh;
+    margin-right: 3vh;
+}
+
+
+
+
+
+footer {
+    background-color: var(--raisin-black);
+    bottom: 0;
+    display: flex;
+    align-content: space-evenly;
+    justify-content: space-between;
+    height: 10vh;
+    margin: 0 0;
+    padding: 3vh;
+    position:absolute;
+    width: 100%;
+}
+.professional-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: center;
+    row-gap: 13px;
+}
+.professional-link a {
+    color: var(--white);
+    text-decoration: underline;
+}
+.professional-link a:hover {
+    color: white;
+}
+.socials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+}
+.socials a {
+    text-decoration: none;
+}
+.socials img {
+    height: 15vw;
+    max-height: 75px;
+    padding-right: 2vw;
+}
