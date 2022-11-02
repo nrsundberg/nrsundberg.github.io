@@ -7,15 +7,20 @@
     --darker-green: #6DCD8E;
     --lighter-green: #D4ECDD;
     --header-font-type: normal normal bold 23px/30px Segoe UI;
-    --large-font-type: normal normal bold 7vw/7vw Segoe UI;
+    --large-font-type: normal normal bold 70px/90px Segoe UI;
+    --section-title-font:normal normal bold 55px/0 Segoe UI;
     --box-font-type: normal normal bold 3rem/0 Segoe UI;
-    --normal-font: normal normal bold 2.4vw Segoe UI;
-    --box-about-font: bold 15px Segoe UI;
+    --normal-font: normal normal bold 25px Segoe UI;
+    --project-text-font: 18px Segoe UI;
+}
+a {
+    text-decoration: none;
 }
 body {
     background-color: var(--background-color);
     margin: 0 0;
 }
+
 .header {
     display: flex;
     align-items: center;
@@ -26,7 +31,6 @@ body {
 .page-selection a {
     color: var(--darker-green);
     font: var(--header-font-type);
-    text-decoration: none;
     padding-right: 1.5rem;
 }
 .page-selection a:hover {
@@ -36,12 +40,10 @@ body {
 }
 .page {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-            "name name name ."
-            "name name name ."
-            "projects projects projects projects"
-            "about about about about";
+            "name" 
+            "projects" 
+            "about";
     margin: 5vh 5vh;
 }
 .full-name {
@@ -63,8 +65,7 @@ body {
             "full-name"
             "professional-title"
             ".";
-    height: 95vh;
-    margin-bottom: 10vh;
+    height: 80vh;
 }
 .name-box {
     align-items: center;
@@ -72,44 +73,57 @@ body {
 }
 .projects {
     grid-area: projects;
-    height: 65vh;
+    height: fit-content;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 15vh 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    row-gap: 55px;
     margin-bottom: 3vh;
 }
 .projects-title {
+    align-self: flex-end;
     grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: span 3;
-    align-self: end;
+    width: 100%;
 }
+.project-group {
+    padding: 0 25px;
+}
+.project-image.p-col2 {
+    justify-self: start;
+    align-self: center;
+}
+.project-image.p-col1 {
+    justify-self: end;
+    align-self: center;
+}
+.project-img {
+    margin-top: 12px;
+    width: 35vw;
+    height: 20vh;
+}
+.project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: stretch;
+}  
+
+.project-sub-title {
+    color: var(--darker-green);
+    font: var(--normal-font);
+}
+.project-text {
+    color: var(--lighter-green);
+    font: var(--project-text-font);
+}
+.p-col1 {
+    grid-column-start: 1;
+}
+.p-col2 {
+    grid-column-start: 2;
+}
+
 .section-title {
     color: var(--darker-green);
-    font: var(--large-font-type);
-}
-.box1 {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row: 2;
-}
-.box2 {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row: 2;
-    margin-left: 12vw;
-}
-.box3 {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row: 2;
-    margin-left: 24vw;
-}
-.box4 {
-    grid-column-start: 1;
-    grid-column-end: span 2;
-    grid-row: 2;
-    margin-left: 36vw;
+    font: var(--section-title-font);
 }
 .about {
     grid-area: about;
@@ -122,73 +136,7 @@ body {
 #about {
     align-self: end;
 }
-.project-box {
-    background: var(--lighter-green);
-    max-height: 600px;
-    height: 45vw;
-    min-width: 200px;
-    width: 35vw;
-    border-radius: 5vw;
-    box-shadow: 0 1vh 3vh #112031;
-}
-.project-box a {
-    text-decoration: none;
-}
-.projects:hover > div {
-    filter: brightness(.5);
-}
-.projects > div:hover {
-    filter: brightness(1);
-    z-index: 1;
-    transform: translateY(-3%)
-}
-.box-title {
-    align-items: end;
-    justify-content: center;
-    border-bottom: var(--darker-green) solid;
-    color: var(--darker-green);
-    display: flex;
-    font: var(--normal-font);
-    height: 5vw;
-}
-.box-about {
-    display: grid;
-    grid-template-rows: 1fr 4fr;
-    grid-template-areas:
-        "text"
-        "photo";
-    justify-content: center;
-    height: 35vw;
-    align-items: end;
-    max-height: 470px;
-}
-.box-text {
-    margin: 2%;
-    color: var(--background-color);
-    font: var(--box-about-font);
-    grid-area: text;
-    margin-top: 4vh;
-}
-.box-image {
-    grid-area: photo;
-    justify-self: center;
-}
-.box4 img {
-    height: 16.76vw;
-    width: 30vw;
-}
-.box3 img {
-    height: 14.49vw;
-    width: 30vw;
-}
-.box1 img {
-    height: 13.45vw;
-    width: 30vw;
-}
-.box2 img {
-    height: 9.68vw;
-    width: 30vw;
-}
+
 .headshot {
     grid-column: 1;
     grid-row: 2;
@@ -196,7 +144,7 @@ body {
     justify-self: center;
 }
 .headshot img{
-    width: 35vw;
+    width: 25vw;
     max-width: 800px;
     padding-right: 10px;
 }
@@ -240,11 +188,81 @@ footer {
     grid-template-columns: 1fr 1fr;
     align-content: center;
 }
-.socials a {
-    text-decoration: none;
-}
 .socials img {
     height: 15vw;
     max-height: 75px;
     padding-right: 2vw;
+}
+@media only screen and (max-width: 800px) {
+    :root{
+        --header-font-type: normal normal bold 19px/10px Segoe UI;
+        --large-font-type: normal normal bold 40px/55px Segoe UI;
+    }
+    .name {
+        height: 55vh;
+    }
+    .p-row2 {
+        justify-content: start;
+    }
+    .project-img {
+        margin-top: 15px;
+        width: 80vw;
+    }
+    .projects {
+        row-gap: 25px;
+    }
+    .project-row {
+        display: grid;
+        grid-template-rows: 1fr 1.5fr;
+        grid-template-columns: 1fr;
+        width: 80vw;
+    }
+    .p-row1 {
+        grid-row-start: 1;
+    }
+    .p-row2 {
+        grid-row-start: 2;
+    }
+    .p-col1 {
+        grid-column-start: 1;
+    }
+    .p-col2 {
+        grid-column-start: 1;
+    }
+    .project-image.p-col2 {
+        align-self: start;
+    }
+    .project-image.p-col1 {
+        align-self: start;
+    }
+    .project-group {
+        padding: 0 0;
+    }
+    .about {
+        grid-template-columns: 1fr;
+        grid-template-rows: 75px 300px 300px;
+        margin-bottom: 10vh;
+        margin-top: 15vh;
+    }
+    .headshot {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: center;
+        justify-self: center;
+    }
+    .headshot img{
+        width: 50vw;
+        max-width: 800px;
+    }
+    .about-text {
+        color: var(--lighter-green);
+        font: var(--normal-font);
+        font-size: 20px;
+        grid-column: 1;
+        grid-row: 3;
+        padding-left: 0px;
+        align-self: flex-start;
+        border-left: none;
+        border-top: var(--darker-green) solid;
+    }
 }

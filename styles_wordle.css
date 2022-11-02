@@ -9,6 +9,7 @@
     --header-font: bold 30px Tahoma;
     --nav-font: bold 12px Tahoma;
     --footer-font: bold 22px/15px Tahoma;
+    --letter-font: bold 50px Tahoma;
 }
 body {
     margin: 0 0;
@@ -73,9 +74,13 @@ header {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .letter {
+    align-items: center;
+    display: flex;
     border: solid var(--raisin-black);
+    font: var(--letter-font);
     width: 75px;
     height: 75px;
+    justify-content: center;
 }
 footer {
     background-color: var(--raisin-black);
