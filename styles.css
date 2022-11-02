@@ -98,7 +98,7 @@ body {
 .project-img {
     margin-top: 12px;
     width: 35vw;
-    height: 20vh;
+    height: 20vw;
 }
 .project-row {
     display: grid;
@@ -207,6 +207,7 @@ footer {
     .project-img {
         margin-top: 15px;
         width: 80vw;
+        height: 40vw;
     }
     .projects {
         row-gap: 25px;
@@ -216,6 +217,9 @@ footer {
         grid-template-rows: 1fr 1.5fr;
         grid-template-columns: 1fr;
         width: 80vw;
+    }
+    #projects {
+        justify-self: end;
     }
     .p-row1 {
         grid-row-start: 1;
@@ -264,5 +268,8 @@ footer {
         align-self: flex-start;
         border-left: none;
         border-top: var(--darker-green) solid;
+    }
+    a:hover {
+        text-decoration: none;
     }
 }
