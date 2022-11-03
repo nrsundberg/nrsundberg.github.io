@@ -9,6 +9,7 @@
         <title>Noah Sundberg | Wordle</title>
         <link rel="icon" href="/assets/Images/NS.png" type="image/x-icon">
         <link rel="stylesheet" href="/assets/css/styles_wordle.css">
+        <script src="/assets/js/papaparse.min.js"></script>
     </head>
     <body>
         <header>
@@ -78,7 +79,12 @@
                 </a>
             </div>
         </footer>
-        <script type="text/javascript" src="answers.json"></script>
-        <script src="wordle.js"></script>
+        <script type="application/json" src="/assets/json/answers.json"></script>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript">
+            let file = d3.csv("/assets/csv/answers.csv")
+            let answers = Papa.parse(file)
+        </script>
+        <script src="/assets/js/wordle.js"></script>
     </body>
 </html>

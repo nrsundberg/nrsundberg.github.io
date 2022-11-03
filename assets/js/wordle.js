@@ -1,5 +1,3 @@
-let possibleGuesses = JSON.parse(answers);
-
 const row1 = document.querySelectorAll(".row-1-letter");
 const row2 = document.querySelectorAll(".row-2-letter");
 const row3 = document.querySelectorAll(".row-3-letter");
