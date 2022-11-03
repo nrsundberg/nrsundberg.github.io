@@ -79,11 +79,13 @@
                 </a>
             </div>
         </footer>
-        <script type="application/json" src="/assets/json/answers.json"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
-            let file = d3.csv("/assets/csv/answers.csv")
-            let answers = Papa.parse(file)
+            const url = "https://raw.githubusercontent.com/nrsundberg/nrsundberg.github.io/main/assets/csv/answers.csv"
+            let answers = ''
+            let file = d3.csv("/assets/csv/answers.csv", (d) => {
+                answers = d
+            })
         </script>
         <script src="/assets/js/wordle.js"></script>
     </body>
