@@ -8,7 +8,11 @@
         <meta http-equiv='pragma' content='no-cache'>
         <title>Noah Sundberg</title>
         <link rel="icon" href="assets/Images/NS.png" type="image/x-icon">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
         <link rel="stylesheet" href="assets/css/styles.css">
+
     </head>
     <body>
         <nav class="header">
@@ -32,7 +36,7 @@
                 <h2 class="section-title projects-title">
                     Projects
                 </h2>
-                <div class="project-row">
+                <div data-aos="fade-left" data-aos-offset="300" class="project-row">
                     <div class="project-group p-col1 p-row1">
                         <div class="project-sub-title">PING PONG BRACKET</div>
                         <div class="project-text">
@@ -45,7 +49,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="project-row">
+                <div data-aos="fade-right" data-aos-offset="400" class="project-row">
                     <div class="project-image p-col1 p-row2">
                         <a href="/under_constuction.html">
                             <img class="project-img" src="/assets/Images/capCom.png" alt="Fake capitalized commission schedule">
@@ -59,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="project-row">
+                <div data-aos="fade-left" data-aos-offset="500" class="project-row">
                     <div class="project-group p-col1 p-row1">
                         <div class="project-sub-title">NHL PREDICTIONS</div>
                         <div class="project-text">
@@ -72,7 +76,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="project-row">
+                <div data-aos="fade-right" data-aos-offset="600" class="project-row">
                     <div class="project-image p-col1 p-row2">
                         <a href="/wordle.html">
                             <img class="project-img" src="/assets/Images/WordleGame.png" alt="Wordle game with suggestions">
@@ -86,7 +90,7 @@
                     </div>
                 </div>
             </section>
-            <section class="about">
+            <section data-aos="fade-up" data-aos-offset="500" class="about">
                 <h2 class="section-title" id="about">
                     About
                 </h2>
@@ -120,5 +124,6 @@
                 </a>
             </div>
         </footer>
+        <script src="/assets/js/main.js"></script>
     </body>
 </html>
