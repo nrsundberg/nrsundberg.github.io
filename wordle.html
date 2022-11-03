@@ -16,7 +16,7 @@
             <p class="game-title">WORDLE</p>
             <div class="game-interaction">
                 <img class="help-question-mark header-item" src="/assets/Images/help_mark.png" alt="Question mark for help with game">
-            <button class="new-game header-item">New Game</button>
+            <button class="new-game header-item" id="new-game-btn">New Game</button>
             </div>
         </header>
         <div class="full-board-area">
@@ -81,10 +81,13 @@
         </footer>
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script type="text/javascript">
-            const url = "https://raw.githubusercontent.com/nrsundberg/nrsundberg.github.io/main/assets/csv/answers.csv"
             let answers = ''
             let file = d3.csv("/assets/csv/answers.csv", (d) => {
-                answers = d
+                answers = d.columns
+            })
+            let words = ''
+            let wordsFile = d3.csv("/assets/csv/words_dictionary.csv", (c) => {
+                words = c.columns
             })
         </script>
         <script src="/assets/js/wordle.js"></script>
