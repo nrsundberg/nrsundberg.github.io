@@ -13,6 +13,10 @@
     --letter-font: bold 50px Tahoma;
 }
 body {
+    display: grid;
+    grid-template-areas:
+        "game"
+        "keyboard";
     margin: 0 0;
 }
 header {
@@ -51,6 +55,7 @@ header {
     width: 100px;
 }
 .full-board-area {
+    grid-area: game;
     display: flex;
     padding-top: 12vh;
     margin: 0 5vw;
@@ -93,7 +98,6 @@ footer {
     margin: 0 0;
     padding-right: 3vh;
     padding-left: 3vh;
-    position: fixed;
     width: 100%;
 }
 .professional-link {
@@ -145,7 +149,7 @@ footer {
 }
 /* Keyboard */
 .keyboard {
-    position: fixed;
+    grid-area: keyboard;
     left: 0;
     bottom: 11vh;
     width: 100%;
@@ -165,6 +169,7 @@ footer {
 
 .keyboard__keys {
     text-align: center;
+    margin-bottom: 5vh;
 }
 
 .keyboard__key {
