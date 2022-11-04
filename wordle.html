@@ -9,9 +9,20 @@
         <title>Noah Sundberg | Wordle</title>
         <link rel="icon" href="/assets/Images/NS.png" type="image/x-icon">
         <link rel="stylesheet" href="/assets/css/styles_wordle.css">
-        <script src="/assets/js/papaparse.min.js"></script>
+        <!-- <script src="/assets/js/papaparse.min.js"></script> -->
     </head>
     <body>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript">
+            let answers = '';
+            let file = d3.csv("/assets/csv/answers.csv", (a) => {
+                answers = a.columns;
+            });
+            let words = ''
+            let wordsFile = d3.csv("/assets/csv/words_dictionary.csv", (w) => {
+                words = w.columns;
+            });
+        </script>
         <header>
             <p class="game-title">WORDLE</p>
             <div class="game-interaction">
@@ -79,17 +90,6 @@
                 </a>
             </div>
         </footer>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script type="text/javascript">
-            let answers = ''
-            let file = d3.csv("/assets/csv/answers.csv", (d) => {
-                answers = d.columns
-            })
-            let words = ''
-            let wordsFile = d3.csv("/assets/csv/words_dictionary.csv", (c) => {
-                words = c.columns
-            })
-        </script>
         <script src="/assets/js/wordle.js"></script>
     </body>
 </html>

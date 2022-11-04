@@ -15,8 +15,8 @@ const gameBoard = [row1, row2, row3, row4, row5, row6];
 let gameWon = 'no'
 let guess = ``;
 let guessAttempt = 0;
-function newAnswer(items) {
-    return items[Math.floor(Math.random()*items.length)];
+function newAnswer() {
+    return answers[Math.floor(Math.random()*answers.length)];
 }
 let answer = "";
 let answerLetters = "";
@@ -32,7 +32,6 @@ function newGame() {
         }
     }
     guessAttempt = 0
-    
 }
 function flushGuess(word) {
     if (guessAttempt === 6) {
@@ -66,6 +65,10 @@ document.addEventListener("keyup", function(evt) {
         guess += typedLetter;
         fillBoardLetter(typedLetter)
     } else if (pressedKey === `Enter`){
+        if (guessAttempt === 0){
+            answer = newAnswer(answers);
+            answerLetters = answer.split("");
+        }
         checkForValidGuess(guess);
     } else {
         return;
@@ -84,7 +87,7 @@ function guessLetterInformation(guess) {
     let guessLetters = guess.split("");
     if (guess === answer) {
         for (let i = 0; i < 5; i++) {
-            gameBoard[guessAttempt][i].style.background = `green`;
+            gameBoard[guessAttempt][i].style.background = `#538d4e`;
             gameBoard[guessAttempt][i].style.color = `white`;
             // create a class that requires new game to start before allowing input
         }
@@ -94,23 +97,23 @@ function guessLetterInformation(guess) {
     for (let letterIndex = 0; letterIndex < 5; letterIndex++) {
         let letter = guessLetters[letterIndex];
         if (letter === answerLetters[letterIndex]) {
-            colorGuessLetter(letterIndex, `green`);
+            colorGuessLetter(letterIndex, `#538d4e`);
         } else if (answerLetters.includes(letter)) {
             let AnswerletterCount = countOccurances(letter, answerLetters);
             let GuessletterCount = countOccurances(letter, guessLetters);
             let doubleLetterList = guessLetters.slice(0, letterIndex + 1);
             let doubleLetterCheck = countOccurances(letter, doubleLetterList);
             if (GuessletterCount <= AnswerletterCount) {
-                colorGuessLetter(letterIndex, `yellow`, `black`);
+                colorGuessLetter(letterIndex, `#b59f3b`);
             } else if (guessLetters[answerLetters.indexOf(letter)] === letter) {
-                colorGuessLetter(letterIndex, `black`);
+                colorGuessLetter(letterIndex, `#3a3a3c`);
             } else if (doubleLetterCheck <= AnswerletterCount) {
-                colorGuessLetter(letterIndex, `black`);
+                colorGuessLetter(letterIndex, `#3a3a3c`);
             } else {
-                colorGuessLetter(letterIndex, `yellow`, `black`);
+                colorGuessLetter(letterIndex, `#b59f3b`);
             }
         } else {
-            colorGuessLetter(letterIndex, `black`);
+            colorGuessLetter(letterIndex, `#3a3a3c`);
         }
     }
 }
@@ -127,11 +130,15 @@ function countOccurances(letter, arrayOfLetters) {
     }
     return freq;
 }
-document.addEventListener('readystatechange', event => { 
-    // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
-    if (event.target.readyState === "complete") {
-        newGame();
-        const newGameButton = document.getElementById("new-game-btn");
-        newGameButton.addEventListener("click", newGame);
-    }
-});
+// document.addEventListener('readystatechange', event => { 
+//     // When window loaded ( external resources are loaded too- `css`,`src`, etc...) 
+//     if (event.target.readyState === "complete") {
+//         console.log(`done loading`);
+//         console.log(answers);
+//         // newGame();
+//         const newGameButton = document.getElementById("new-game-btn");
+//         newGameButton.addEventListener("click", newGame);
+//     }
+// });
+const newGameButton = document.getElementById("new-game-btn");
+newGameButton.addEventListener("click", newGame);
