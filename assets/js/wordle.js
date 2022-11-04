@@ -21,6 +21,7 @@ function newAnswer() {
 let answer = "";
 let answerLetters = "";
 function newGame() {
+    document.getElementById("game-board").focus();
     answer = newAnswer(answers);
     answerLetters = answer.split("");
     gameWon = 'no'
@@ -31,6 +32,7 @@ function newGame() {
             gameBoard[boardRow][i].innerText = ``;
         }
     }
+    guess = ``
     guessAttempt = 0
 }
 function flushGuess(word) {
@@ -48,7 +50,7 @@ function fillBoardLetter(letter) {
 }
 document.addEventListener("keyup", function(evt) {
     if (gameWon == 'yes'){
-        return
+        return;
     }
     const pressedKey = evt.code;
     const typedLetter = pressedKey.substring(3);
@@ -65,7 +67,7 @@ document.addEventListener("keyup", function(evt) {
         guess += typedLetter;
         fillBoardLetter(typedLetter)
     } else if (pressedKey === `Enter`){
-        if (guessAttempt === 0){
+        if (guessAttempt === 0 && answer == ""){
             answer = newAnswer(answers);
             answerLetters = answer.split("");
         } else if (guess.length === 0) {
