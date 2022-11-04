@@ -214,8 +214,8 @@ const Keyboard = {
         const keyLayout = [
             
               "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-            "a", "s", "d", "f", "g", "h", "j", "k", "l", "Backspace",
-                  "z", "x", "c", "v", "b", "n", "m","Enter",
+            "a", "s", "d", "f", "g", "h", "j", "k", "l", 
+            "Enter", "z", "x", "c", "v", "b", "n", "m","&#129044;"
         ];
 
         // Creates HTML for an icon
@@ -225,16 +225,16 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["p", "Backspace", "Enter"].indexOf(key) !== -1;
+            const insertLineBreak = ["p", "l", "&#129044;"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("keyboard__key");
 
             switch (key) {
-                case "Backspace":
+                case "&#129044;":
                     keyElement.classList.add("keyboard__key--wide");
-                    keyElement.innerHTML = createIconHTML("Backspace");
+                    keyElement.innerHTML = createIconHTML("&#129044;");
 
                     keyElement.addEventListener("click", () => {
                         // this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
