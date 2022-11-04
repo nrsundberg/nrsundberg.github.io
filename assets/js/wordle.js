@@ -68,6 +68,8 @@ document.addEventListener("keyup", function(evt) {
         if (guessAttempt === 0){
             answer = newAnswer(answers);
             answerLetters = answer.split("");
+        } else if (guess.length === 0) {
+            return;
         }
         checkForValidGuess(guess);
     } else {
