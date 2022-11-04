@@ -79,6 +79,12 @@ body {
     row-gap: 55px;
     margin-bottom: 3vh;
 }
+#game-board:focus-visible {
+    outline: none;
+}
+div#game-board {
+    outline: none;
+}
 .projects-title {
     color: var(--darker-green);
     align-self: flex-end;
