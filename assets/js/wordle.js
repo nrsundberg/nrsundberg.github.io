@@ -1,13 +1,17 @@
-//  rewrite so I can select all my rows at once
-//  rewrite so quess is a value and parses into the html
 // variables //
-// let answer = 'crane';
-// let answerLetters = answer.split("")
-let [gameWon, guess, guessAttempt, answer, answerLetters] = ['no', ``, 0, ``, ``];
+let [gameWon, guess, guessAttempt, words, answers, answer] = ['no', ``, 0, Array(), Array(), ``];
 let [greenTile, greyTile, yellowTile] = [`#538d4e`, `#3a3a3c`, `#b59f3b`];
 const [letterTiles, newGameButton, gameBoardRows]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row")];
-// end variables //
-
+// load files //
+d3.csv("/assets/csv/answers.csv", function(data) {
+    answers.push(data.columns);
+    answers = answers[0];
+    answer = answers[Math.floor(Math.random()*answers.length)];
+});
+d3.csv("/assets/csv/words_dictionary.csv", function(data) {
+    words.push(data.columns);
+    words = words[0];
+});
 // event listeners //
 newGameButton.addEventListener("click", newGame);
 document.addEventListener("keyup", function(keyPressEvent) {
@@ -17,11 +21,7 @@ document.addEventListener("keyup", function(keyPressEvent) {
 });
 document.addEventListener("DOMContentLoaded", function () {
     Keyboard.init();
-    answer = newAnswer();
-    answerLetters = answer.split("")
 });
-// end event listeners //
-
 // functions //
 function gamePlay(pressedKey, typedLetter) {
     gameBoardRows[guessAttempt].classList.remove("apply-shake");
@@ -54,6 +54,7 @@ function flushGuess() {
 function colorLetterTiles(guess) {
     guess = guess.toLowerCase();
     let guessLetters = guess.split("");
+    let answerLetters = answer.split("")
     if (guess === answer) {
         for (let i = 0; i < 5; i++) {
             letterTiles[guessAttempt * 5 + i].style.cssText = `background: ${greenTile}; color: white`;
@@ -95,8 +96,7 @@ function renderGuess(letter, key = ``) {
 };
 function newGame() {
     document.getElementById("game-board").focus();
-    answer = newAnswer(answers);
-    answerLetters = answer.split("");
+    answer = answers[Math.floor(Math.random()*answers.length)];
     gameWon = 'no'
     for (let i = 0; i < 29; i++) {
         letterTiles[i].style.cssText = 'background: white; color: black;';
@@ -104,10 +104,6 @@ function newGame() {
     }
     guess = ``
     guessAttempt = 0
-}
-function newAnswer() {
-    return answers[Math.floor(Math.random()*answers.length)];
-    // return 'crane'
 }
 function countOccurances(letter, arrayOfLetters) {
     let freq = 0;
@@ -118,8 +114,6 @@ function countOccurances(letter, arrayOfLetters) {
     }
     return freq;
 }
-// end functions //
-
 // keyboard //
 const Keyboard = {
     elements: {
@@ -246,4 +240,3 @@ const Keyboard = {
         this.eventHandlers.onclose = onclose;
     }
 };
-// end keyboard //
