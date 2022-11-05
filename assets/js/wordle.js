@@ -1,6 +1,6 @@
 // variables //
 let [gameWon, guess, guessAttempt, words, answers, answer] = ['no', ``, 0, Array(), Array(), ``];
-let [greenTile, greyTile, yellowTile] = [`#538d4e`, `#3a3a3c`, `#b59f3b`];
+let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 const [letterTiles, newGameButton, gameBoardRows]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row")];
 // load files //
 d3.csv("/assets/csv/answers.csv", function(data) {
@@ -81,6 +81,7 @@ function colorLetterTiles(guess) {
             }
         } else {
             colorGuessLetter(letterIndex, greyTile);
+            screenKeyboardShade(letter);
         }
     }
 };
@@ -97,13 +98,18 @@ function renderGuess(letter, key = ``) {
 function newGame() {
     document.getElementById("game-board").focus();
     answer = answers[Math.floor(Math.random()*answers.length)];
-    gameWon = 'no'
+    gameWon = 'no';
     for (let i = 0; i < 29; i++) {
         letterTiles[i].style.cssText = 'background: white; color: black;';
         letterTiles[i].innerText = ``;
     }
-    guess = ``
-    guessAttempt = 0
+    guess = ``;
+    guessAttempt = 0;
+    let keyboardButtons = Array.from(document.querySelectorAll(".keyboard__key"))
+    keyboardButtons.forEach(keyToChange => {
+        keyToChange.style.background = lightGrey;
+
+    });
 }
 function countOccurances(letter, arrayOfLetters) {
     let freq = 0;
@@ -113,6 +119,11 @@ function countOccurances(letter, arrayOfLetters) {
         }
     }
     return freq;
+}
+function screenKeyboardShade(letter) {
+    let keyboardButtons = Array.from(document.querySelectorAll(".keyboard__key"))
+                            .find(item => item.textContent === letter)
+    keyboardButtons.style.cssText = `background: ${greyTile}; color: white`;
 }
 // keyboard //
 const Keyboard = {
@@ -164,7 +175,7 @@ const Keyboard = {
             
               "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
             "a", "s", "d", "f", "g", "h", "j", "k", "l", 
-            "Enter", "z", "x", "c", "v", "b", "n", "m","&#129044;"
+            "Enter", "z", "x", "c", "v", "b", "n", "m","&#8592;"
         ];
 
         // Creates HTML for an icon
@@ -174,16 +185,16 @@ const Keyboard = {
 
         keyLayout.forEach(key => {
             const keyElement = document.createElement("button");
-            const insertLineBreak = ["p", "l", "&#129044;"].indexOf(key) !== -1;
+            const insertLineBreak = ["p", "l", "&#8592;"].indexOf(key) !== -1;
 
             // Add attributes/classes
             keyElement.setAttribute("type", "button");
             keyElement.classList.add("keyboard__key");
 
             switch (key) {
-                case "&#129044;":
+                case "&#8592;":
                     keyElement.classList.add("keyboard__key--wide");
-                    keyElement.innerHTML = createIconHTML("&#129044;");
+                    keyElement.innerHTML = createIconHTML("&#8592;");
 
                     keyElement.addEventListener("click", () => {
                         gamePlay("Backspace", "Backspace");
