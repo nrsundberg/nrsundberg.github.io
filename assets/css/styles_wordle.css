@@ -223,6 +223,9 @@ footer {
     header {
         height: 70px;
     }
+    .game-title {
+        font-size: 23px;
+    }
     .home-nav {
         align-self: center;
         color: var(--white);
