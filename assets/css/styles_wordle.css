@@ -12,19 +12,24 @@
     --footer-font: bold 22px/15px Tahoma;
     --letter-font: bold 50px Tahoma;
 }
+
 body {
     display: grid;
     grid-template-areas:
+        "."
         "game"
-        "keyboard";
+        "keyboard"
+        ".";
     margin: 0 0;
+    height: 100vh;
+    grid-template-rows: 100px 4fr 1fr 95px;
 }
 header {
     align-content: center;
     background-color: var(--raisin-black);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    height: 8vh;
+    height: 100px;
     position: absolute;
     width: 100%;
 }
@@ -60,10 +65,9 @@ header {
 .full-board-area {
     grid-area: game;
     display: flex;
-    padding-top: 12vh;
     margin: 0 5vw;
-    margin-bottom: 10vh;
     justify-content: center;
+    align-items: center;
 }
 div#game-board:focus-visible {
     outline: none;
@@ -72,6 +76,7 @@ div#game-board:focus-visible {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     row-gap: 5px;
+    margin-top: 5vh;
     margin-bottom: 5vh;
 }
 .row-1 { grid-row: 1;}
@@ -90,13 +95,16 @@ div#game-board:focus-visible {
     display: flex;
     border: solid var(--raisin-black);
     font: var(--letter-font);
-    width: 60px;
-    height: 60px;
+    width: 10vh;
+    height: 10vh; 
+    max-width: 60px;
+    max-height: 60px;
     justify-content: center;
 }
 footer {
     background-color: var(--raisin-black);
     bottom: 0;
+    position: fixed;
     display: flex;
     align-content: space-evenly;
     justify-content: space-between;
@@ -155,18 +163,18 @@ footer {
 }
 /* Keyboard */
 .keyboard {
+    align-self: center;
+    display: block;
     grid-area: keyboard;
-    left: 0;
     bottom: 11vh;
     width: 100%;
-    padding: 5px 0;
     user-select: none;
     transition: bottom 0.4s;
 }
 
 .keyboard__keys {
     text-align: center;
-    margin-bottom: 5vh;
+    bottom: 100px;
 }
 
 .keyboard__key {
@@ -251,3 +259,17 @@ footer {
         margin-right: 2vw;
     }
 }
+/* @media only screen and (max-height: 700px) { 
+    body {
+    grid-template-areas:
+    "game keyboard";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+    }
+    .keyboard {
+        grid-column: 2;
+    }
+    .full-board-area {
+        grid-column: 1;
+    }
+} */
