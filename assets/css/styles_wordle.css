@@ -1,3 +1,7 @@
+html, body, * {
+    touch-action: manipulation;
+}
+
 * {
     box-sizing: border-box;
 }
