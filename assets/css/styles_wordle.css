@@ -226,6 +226,10 @@ footer {
     .game-title {
         font-size: 23px;
     }
+    .letter {
+        height: 6vh;
+        width: 6vh;
+    }
     .home-nav {
         align-self: center;
         color: var(--white);
@@ -239,8 +243,7 @@ footer {
         width: 49px;
     }
     body {
-        height: 100vh;
-        grid-template-rows: 70px 4fr 1fr;
+        height: 90vh;
         grid-template-areas:
         "."
         "game"
@@ -275,5 +278,6 @@ footer {
     }
     .game-area {
         margin-top: 1vh;
+        margin-bottom: 0;
     }
 }
