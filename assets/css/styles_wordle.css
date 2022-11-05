@@ -219,6 +219,9 @@ footer {
         --home-font: bold 20px Tahoma;
 
     }
+    header {
+        height: 70px;
+    }
     .home-nav {
         align-self: center;
         color: var(--white);
@@ -260,18 +263,7 @@ footer {
         height: 4vh;
         margin-right: 2vw;
     }
+    .game-area {
+        margin-top: 1vh;
+    }
 }
-/* @media only screen and (max-height: 700px) { 
-    body {
-    grid-template-areas:
-    "game keyboard";
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: none;
-    }
-    .keyboard {
-        grid-column: 2;
-    }
-    .full-board-area {
-        grid-column: 1;
-    }
-} */
