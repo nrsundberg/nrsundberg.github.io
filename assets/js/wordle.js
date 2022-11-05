@@ -1,127 +1,62 @@
-const row1all = document.querySelector(".row-1");
-const row2all = document.querySelector(".row-2");
-const row3all = document.querySelector(".row-3");
-const row4all = document.querySelector(".row-4");
-const row5all = document.querySelector(".row-5");
-const row6all = document.querySelector(".row-6");
-const gameBoardRows = [row1all, row2all, row3all, row4all, row5all, row6all];
-const row1 = document.querySelectorAll(".row-1-letter");
-const row2 = document.querySelectorAll(".row-2-letter");
-const row3 = document.querySelectorAll(".row-3-letter");
-const row4 = document.querySelectorAll(".row-4-letter");
-const row5 = document.querySelectorAll(".row-5-letter");
-const row6 = document.querySelectorAll(".row-6-letter");
-const gameBoard = [row1, row2, row3, row4, row5, row6];
-let gameWon = 'no'
-let guess = ``;
-let guessAttempt = 0;
-function newAnswer() {
-    return answers[Math.floor(Math.random()*answers.length)];
-}
-let answer = "";
-let answerLetters = "";
-function newGame() {
-    document.getElementById("game-board").focus();
-    answer = newAnswer(answers);
-    answerLetters = answer.split("");
-    gameWon = 'no'
-    for (boardRow in gameBoardRows){
-        for (let i = 0; i < 5; i++) {
-            gameBoard[boardRow][i].style.background = `white`;
-            gameBoard[boardRow][i].style.color = `black`;
-            gameBoard[boardRow][i].innerText = ``;
-        }
-    }
-    guess = ``
-    guessAttempt = 0
-}
-function flushGuess(word) {
-    if (guessAttempt === 6) {
-        console.log(`too many guesses`);
-    } else {
-        console.log(word);
-        guess = ``;
-        guessAttempt++;
-    }
-}
-function fillBoardLetter(letter) {
-    const letterToChange = gameBoard[guessAttempt][(guess.length - 1)];
-    letterToChange.innerText = letter;
-}
-document.addEventListener("keyup", function(evt) {
-    if (gameWon == 'yes'){
-        return;
-    }
-    const pressedKey = evt.code;
-    const typedLetter = pressedKey.substring(3);
-    gameBoardRows[guessAttempt].classList.remove("apply-shake");    
-    if (pressedKey == `Backspace`) {
-        if (guess.length === 0) {
-            return;
-        }
-        fillBoardLetter(``);
-        guess = guess.slice(0, -1);
-    } else if (guess.length === 5 && pressedKey != `Enter`) {
-        return;
-    } else if (pressedKey.substring(0,3) === `Key`) {
-        guess += typedLetter;
-        fillBoardLetter(typedLetter)
-    } else if (pressedKey === `Enter`){
-        if (guessAttempt === 0 && answer == ""){
-            answer = newAnswer(answers);
-            answerLetters = answer.split("");
-        } else if (guess.length === 0) {
-            return;
-        }
-        checkForValidGuess(guess);
-    } else {
-        return;
-    }
+//  rewrite so I can select all my rows at once
+//  rewrite so quess is a value and parses into the html
+// variables //
+// let answer = 'crane';
+// let answerLetters = answer.split("")
+let [gameWon, guess, guessAttempt, answer, answerLetters] = ['no', ``, 0, ``, ``];
+let [greenTile, greyTile, yellowTile] = [`#538d4e`, `#3a3a3c`, `#b59f3b`];
+const [letterTiles, newGameButton, gameBoardRows]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row")];
+// end variables //
+
+// event listeners //
+newGameButton.addEventListener("click", newGame);
+document.addEventListener("keyup", function(keyPressEvent) {
+    const pressedKey = keyPressEvent.code;
+    const typedLetter = keyPressEvent.key;
+    gamePlay(pressedKey, typedLetter);
 });
-function screenKeyboardInput(letter) {
-    if (gameWon == 'yes'){
-        return
+document.addEventListener("DOMContentLoaded", function () {
+    Keyboard.init();
+    answer = newAnswer();
+    answerLetters = answer.split("")
+});
+// end event listeners //
+
+// functions //
+function gamePlay(pressedKey, typedLetter) {
+    gameBoardRows[guessAttempt].classList.remove("apply-shake");
+    if (gameWon === `yes` || guessAttempt === 6) {
+        return;
     }
-    const typedLetter = letter.toUpperCase()
-    const pressedKey = letter
-    gameBoardRows[guessAttempt].classList.remove("apply-shake");    
-    if (pressedKey == `Backspace`) {
-        if (guess.length === 0) {
-            return;
+    if (pressedKey === 'Enter') {
+        flushGuess();
+    } else if (pressedKey.slice(0,3) === `Key`) {
+        if (guess.length === 5) {
+            return
+        } else {
+            guess += typedLetter;
+            renderGuess(typedLetter);
         }
-        fillBoardLetter(``);
-        guess = guess.slice(0, -1);
-    } else if (guess.length === 5 && pressedKey != `Enter`) {
-        return;
-    } else if (pressedKey != `Enter` && pressedKey !=  `Backspace`) {
-        guess += typedLetter;
-        fillBoardLetter(typedLetter)
-    } else if (pressedKey === `Enter`) {
-        if (guessAttempt === 0){
-            answer = newAnswer(answers);
-            answerLetters = answer.split("");
-        }
-        checkForValidGuess(guess);
-    } else {
-        return;
+    } else if (pressedKey === `Backspace` ) {
+        guess = guess.slice(0, guess.length - 1); 
+        renderGuess(typedLetter, pressedKey);
     }
 };
-function checkForValidGuess(guess) {
-    if (words.includes(guess.toLowerCase())) {
-        guessLetterInformation(guess);
-        flushGuess(guess);
+function flushGuess() {
+    if (guess.length === 5 && words.includes(guess)) {
+        colorLetterTiles(guess);
+        guessAttempt ++;
+        guess = ``
     } else {
         gameBoardRows[guessAttempt].classList.add("apply-shake");
     }
-}
-function guessLetterInformation(guess) {
+};
+function colorLetterTiles(guess) {
     guess = guess.toLowerCase();
     let guessLetters = guess.split("");
     if (guess === answer) {
         for (let i = 0; i < 5; i++) {
-            gameBoard[guessAttempt][i].style.background = `#538d4e`;
-            gameBoard[guessAttempt][i].style.color = `white`;
-            // create a class that requires new game to start before allowing input
+            letterTiles[guessAttempt * 5 + i].style.cssText = `background: ${greenTile}; color: white`;
         }
         gameWon = 'yes'
         return
@@ -129,29 +64,50 @@ function guessLetterInformation(guess) {
     for (let letterIndex = 0; letterIndex < 5; letterIndex++) {
         let letter = guessLetters[letterIndex];
         if (letter === answerLetters[letterIndex]) {
-            colorGuessLetter(letterIndex, `#538d4e`);
+            colorGuessLetter(letterIndex, greenTile);
         } else if (answerLetters.includes(letter)) {
             let AnswerletterCount = countOccurances(letter, answerLetters);
             let GuessletterCount = countOccurances(letter, guessLetters);
-            let doubleLetterList = guessLetters.slice(0, letterIndex + 1);
-            let doubleLetterCheck = countOccurances(letter, doubleLetterList);
+            let doubleLetterCheck = countOccurances(letter, (guessLetters.slice(0, letterIndex + 1)));
             if (GuessletterCount <= AnswerletterCount) {
-                colorGuessLetter(letterIndex, `#b59f3b`);
+                colorGuessLetter(letterIndex, yellowTile);
             } else if (guessLetters[answerLetters.indexOf(letter)] === letter) {
-                colorGuessLetter(letterIndex, `#3a3a3c`);
+                colorGuessLetter(letterIndex, greyTile);
             } else if (doubleLetterCheck <= AnswerletterCount) {
-                colorGuessLetter(letterIndex, `#3a3a3c`);
+                colorGuessLetter(letterIndex, greyTile);
             } else {
-                colorGuessLetter(letterIndex, `#b59f3b`);
+                colorGuessLetter(letterIndex, yellowTile);
             }
         } else {
-            colorGuessLetter(letterIndex, `#3a3a3c`);
+            colorGuessLetter(letterIndex, greyTile);
         }
     }
-}
+};
 function colorGuessLetter(letterIndex, color, letterColor = 'white') {
-    gameBoard[guessAttempt][letterIndex].style.background = color;
-    gameBoard[guessAttempt][letterIndex].style.color = letterColor;
+    letterTiles[guessAttempt * 5 + letterIndex].style.cssText = `background: ${color}; color: ${letterColor}`;
+}
+function renderGuess(letter, key = ``) {
+    if (key === `Backspace`) {
+            letterTiles[(guessAttempt * 5 + guess.length)].innerText = ``
+    } else {
+        letterTiles[(guessAttempt * 5 + guess.length - 1)].innerText = letter
+    }
+};
+function newGame() {
+    document.getElementById("game-board").focus();
+    answer = newAnswer(answers);
+    answerLetters = answer.split("");
+    gameWon = 'no'
+    for (let i = 0; i < 29; i++) {
+        letterTiles[i].style.cssText = 'background: white; color: black;';
+        letterTiles[i].innerText = ``;
+    }
+    guess = ``
+    guessAttempt = 0
+}
+function newAnswer() {
+    return answers[Math.floor(Math.random()*answers.length)];
+    // return 'crane'
 }
 function countOccurances(letter, arrayOfLetters) {
     let freq = 0;
@@ -162,10 +118,9 @@ function countOccurances(letter, arrayOfLetters) {
     }
     return freq;
 }
-const newGameButton = document.getElementById("new-game-btn");
-newGameButton.addEventListener("click", newGame);
+// end functions //
 
-// keyboard
+// keyboard //
 const Keyboard = {
     elements: {
         main: null,
@@ -237,10 +192,7 @@ const Keyboard = {
                     keyElement.innerHTML = createIconHTML("&#129044;");
 
                     keyElement.addEventListener("click", () => {
-                        // this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-                        this.properties.value = "Backspace";
-                        screenKeyboardInput(this.properties.value);
-                        this._triggerEvent("oninput");
+                        gamePlay("Backspace", "Backspace");
                     });
 
                     break;
@@ -250,9 +202,7 @@ const Keyboard = {
                     keyElement.innerHTML = createIconHTML("Enter");
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value = "Enter";
-                        screenKeyboardInput(letter = this.properties.value);    
-                        this._triggerEvent("oninput");
+                        gamePlay("Enter", "Enter");    
                     });
 
                     break;
@@ -261,10 +211,8 @@ const Keyboard = {
                     keyElement.textContent = key.toLowerCase();
 
                     keyElement.addEventListener("click", () => {
-                        this.properties.value = this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-                        console.log(this.properties.value)
-                        screenKeyboardInput(letter = (this.properties.value));
-                        this._triggerEvent("oninput");
+                        this.properties.value = key.toLowerCase();
+                        gamePlay(`Key`,(this.properties.value));
                     });
 
                     break;
@@ -298,7 +246,4 @@ const Keyboard = {
         this.eventHandlers.onclose = onclose;
     }
 };
-
-window.addEventListener("DOMContentLoaded", function () {
-    Keyboard.init();
-});
+// end keyboard //
