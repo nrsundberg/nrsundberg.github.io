@@ -76,6 +76,7 @@ function colorLetterTiles(guess) {
     if (guess === answer) {
         for (let i = 0; i < 5; i++) {
             letterTiles[guessAttempt * 5 + i].style.cssText = `background: ${greenTile}; color: white; border: ${greenTile}`;
+            confetti();
         }
         gameWon = 'yes'
         return
