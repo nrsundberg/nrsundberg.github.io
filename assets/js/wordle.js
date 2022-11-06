@@ -1,3 +1,4 @@
+// screenkeyboard don't change from green back and not from yellow to grey
 // variables //
 let [gameWon, guess, guessAttempt, words, answers, answer] = ['no', ``, 0, Array(), Array(), ``];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
@@ -55,6 +56,12 @@ function flushGuess() {
     if (guess.length === 5 && words.includes(guess)) {
         colorLetterTiles(guess);
         guessAttempt ++;
+        if (guessAttempt === 6 && guess != answer) {
+            // code to pop up correct answer
+            const answerBox = document.querySelector(".answer-pop-up");
+            answerBox.innerText = answer.toUpperCase();
+            answerBox.style.cssText = `display: flex;`;
+        }        
         guess = ``
     } else {
         gameBoardRows[guessAttempt].classList.add("apply-shake");
@@ -66,7 +73,7 @@ function colorLetterTiles(guess) {
     let answerLetters = answer.split("")
     if (guess === answer) {
         for (let i = 0; i < 5; i++) {
-            letterTiles[guessAttempt * 5 + i].style.cssText = `background: ${greenTile}; color: white`;
+            letterTiles[guessAttempt * 5 + i].style.cssText = `background: ${greenTile}; color: white; border: ${greenTile}`;
         }
         gameWon = 'yes'
         return
@@ -83,15 +90,12 @@ function colorLetterTiles(guess) {
             if (GuessletterCount <= AnswerletterCount) {
                 colorGuessLetter(letterIndex, yellowTile);
                 screenKeyboardShade(letter, yellowTile);
-            // } else if (guessLetters[answerLetters.indexOf(letter)] === letter) {
-            //     colorGuessLetter(letterIndex, greyTile);
             } else if (doubleLetterCheck <= AnswerletterCount) {
-                colorGuessLetter(letterIndex, greyTile);
-                screenKeyboardShade(letter);
-            } else {
                 colorGuessLetter(letterIndex, yellowTile);
-                screenKeyboardShade(letter);
-                screenKeyboardShade(letter);
+                screenKeyboardShade(letter, yellowTile);
+            } else {
+                colorGuessLetter(letterIndex, greyTile);
+                screenKeyboardShade(letter, greyTile);
             }
         } else {
             colorGuessLetter(letterIndex, greyTile);
@@ -100,20 +104,20 @@ function colorLetterTiles(guess) {
     }
 };
 function colorGuessLetter(letterIndex, color, letterColor = 'white') {
-    letterTiles[guessAttempt * 5 + letterIndex].style.cssText = `background: ${color}; color: ${letterColor}`;
+    letterTiles[guessAttempt * 5 + letterIndex].style.cssText = `background: ${color}; color: ${letterColor}; border: ${color}`;
 }
 function renderGuess(letter, key = ``) {
     if (key === `Backspace`) {
-            letterTiles[(guessAttempt * 5 + guess.length)].innerText = ``
+            letterTiles[(guessAttempt * 5 + guess.length)].innerText = ``;
     } else {
-        letterTiles[(guessAttempt * 5 + guess.length - 1)].innerText = letter
+        letterTiles[(guessAttempt * 5 + guess.length - 1)].innerText = letter.toUpperCase();
     }
 };
 function newGame() {
     document.getElementById("game-board").focus();
     answer = answers[Math.floor(Math.random()*answers.length)];
     gameWon = 'no';
-    for (let i = 0; i < 29; i++) {
+    for (let i = 0; i <= 29; i++) {
         letterTiles[i].style.cssText = 'background: white; color: black;';
         letterTiles[i].innerText = ``;
     }
@@ -122,7 +126,8 @@ function newGame() {
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard__key"))
     keyboardButtons.forEach(keyToChange => {
         keyToChange.style.background = lightGrey;
-
+    const answerBox = document.querySelector(".answer-pop-up");
+    answerBox.style.cssText = `display: none;`;
     });
 }
 function countOccurances(letter, arrayOfLetters) {
@@ -136,8 +141,32 @@ function countOccurances(letter, arrayOfLetters) {
 }
 function screenKeyboardShade(letter, color) {
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard__key"))
-                            .find(item => item.textContent === letter)
-    keyboardButtons.style.cssText = `background: ${color}; color: white`;
+                            .find(item => item.textContent === letter);
+    let colorOfButton = keyboardButtons.style.background;
+    switch(colorOfButton) {
+        // first two are for start of game and then after a new game is started
+        case '':
+            keyboardButtons.style.cssText = `background: ${color}; color: white`;
+            return;
+        case 'rgb(131, 131, 139)':
+            keyboardButtons.style.cssText = `background: ${color}; color: white`;
+            return;
+        // green letter already green
+        case 'rgb(83, 141, 78)':
+            return;
+            // yellow letter if statement to move to green but not grey
+        case 'rgb(181, 159, 59)':
+            if (color === `#538d4e`) {
+                keyboardButtons.style.cssText = `background: ${color}; color: white`;        
+                return;
+            } else {
+                return;
+            } 
+            // grey moving to any color
+        case 'rgb(58, 58, 60)':
+            keyboardButtons.style.cssText = `background: ${color}; color: white`;
+            return;
+    }
 }
 // keyboard //
 const Keyboard = {

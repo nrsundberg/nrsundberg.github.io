@@ -15,7 +15,7 @@ html, body, * {
     --header-font: bold 30px Tahoma;
     --nav-font: bold 12px Tahoma;
     --footer-font: bold 22px/15px Tahoma;
-    --letter-font: bold 50px Tahoma;
+    --letter-font: bold 45px Tahoma;
 }
 
 body {
@@ -56,13 +56,16 @@ header {
 .help-question-mark {
     width: 5vh;
     height: 5vh;
+    max-width: 60px;
+    max-height: 60px;
     margin-right: 2vw;
+    margin-bottom: 0;
 }
 .new-game {
     background-color: var(--white);
     border-radius: 2vh;
     color: var(--raisin-black);
-    height: 4vh;
+    height: 60px;
     font: var(--nav-font);
     margin-right: 3vh;
     width: 100px;
@@ -98,12 +101,14 @@ div#game-board:focus-visible {
 .pop-up-full {
     z-index: 10;
     color: white;
-    border-radius: 4vh;
+    border-radius: 30px;
     display: none;
-    margin: 25vh 25vw;
+    margin-top: 30vh;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px 25px;
-    height: 50vh;
-    width: 50vw;
+    height: 400px;
+    width: 500px;
     background-color: var(--raisin-black);
 }
 .pop-up-full p, h4, h2, h1, img {
@@ -111,8 +116,24 @@ div#game-board:focus-visible {
     margin-bottom: 15px;
 }
 .pop-up-full img {
-    width: 20vw;
+    width: 250px;
     margin-bottom: 0;
+}
+.answer-pop-up {
+    display: none;
+    z-index: 10;
+    color: white;
+    background-color: var(--raisin-black);
+    border: solid 4px var(--raisin-black);
+    border-radius: 4px;
+    margin-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font: var(--header-font);
 }
 .first-line {
     display: flex;
@@ -166,8 +187,9 @@ footer {
 }
 .socials img {
     height: 7.5vh;
-    max-height: 75px;
+    max-height: 60px;
     padding-right: 2vw;
+    margin-bottom: 0;
 }
 @keyframes shake {
     10%, 90% {
@@ -244,14 +266,19 @@ footer {
 @media only screen and (max-width: 500px) {
     :root {
         --header-font: bold 25px Tahoma;
-        --home-font: bold 20px Tahoma;
-
+        --home-font: bold 17px Tahoma;
+        --letter-font: bold 25px Tahoma;
     }
     header {
         height: 70px;
+        grid-template-columns: 1fr 2fr 2fr;
+    } 
+    header img {
+        margin: 0;
     }
+
     .game-title {
-        font-size: 23px;
+        font-size: 19px;
     }
     .letter {
         height: 6vh;
@@ -259,9 +286,9 @@ footer {
     }
     .home-nav {
         align-self: center;
+        justify-self: center;
         color: var(--white);
         font: var(--home-font);
-        margin-left: 10vw;
         display: flex;
         grid-column: 1;
         text-decoration: none;
@@ -295,8 +322,10 @@ footer {
         width: 8%;
     }
     .new-game {
-        margin-right: 4vw;
-        width: 75px;
+        margin-right: 2vw;
+        width: 90px;
+        font-size: 17px;
+
     }
     .help-question-mark {
         width: 4vh;
@@ -305,6 +334,27 @@ footer {
     }
     .game-area {
         margin-top: 1vh;
+        margin-bottom: 0;
+    }
+    .pop-up-full {
+        z-index: 10;
+        color: white;
+        border-radius: 30px;
+        display: none;
+        margin-top: 20vh;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 25px;
+        height: 450px;
+        width: 350px;
+        background-color: var(--raisin-black);
+    }
+    .pop-up-full p, h4, h2, h1, img {
+        margin: 0 0;
+        margin-bottom: 15px;
+    }
+    .pop-up-full img {
+        width: 250px;
         margin-bottom: 0;
     }
 }
