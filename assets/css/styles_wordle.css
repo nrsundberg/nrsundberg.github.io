@@ -95,6 +95,29 @@ div#game-board:focus-visible {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
+.pop-up-full {
+    z-index: 10;
+    color: white;
+    border-radius: 4vh;
+    display: none;
+    margin: 25vh 25vw;
+    padding: 10px 25px;
+    height: 50vh;
+    width: 50vw;
+    background-color: var(--raisin-black);
+}
+.pop-up-full p, h4, h2, h1, img {
+    margin: 0 0;
+    margin-bottom: 15px;
+}
+.pop-up-full img {
+    width: 20vw;
+    margin-bottom: 0;
+}
+.first-line {
+    display: flex;
+    justify-content: space-between;
+}
 .letter {
     align-items: center;
     display: flex;

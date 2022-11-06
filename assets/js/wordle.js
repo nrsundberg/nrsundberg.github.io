@@ -1,7 +1,7 @@
 // variables //
 let [gameWon, guess, guessAttempt, words, answers, answer] = ['no', ``, 0, Array(), Array(), ``];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
-const [letterTiles, newGameButton, gameBoardRows]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row")];
+const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelector(".help-question-mark")];
 // load files //
 d3.csv("/assets/csv/answers.csv", function(data) {
     answers.push(data.columns);
@@ -14,6 +14,15 @@ d3.csv("/assets/csv/words_dictionary.csv", function(data) {
 });
 // event listeners //
 newGameButton.addEventListener("click", newGame);
+helpButton.addEventListener("click", function() {
+    const popUp = document.querySelector(".pop-up-full");
+    popUp.style.cssText = `display: block`;
+})
+const popUpClose = document.querySelector(".leave-pop-up")
+popUpClose.addEventListener("click", function(closeWindow) {
+    const popUp = document.querySelector(".pop-up-full");
+    popUp.style.cssText = `display: none`;
+})
 document.addEventListener("keyup", function(keyPressEvent) {
     const pressedKey = keyPressEvent.code;
     const typedLetter = keyPressEvent.key;
@@ -66,22 +75,27 @@ function colorLetterTiles(guess) {
         let letter = guessLetters[letterIndex];
         if (letter === answerLetters[letterIndex]) {
             colorGuessLetter(letterIndex, greenTile);
+            screenKeyboardShade(letter, greenTile);
         } else if (answerLetters.includes(letter)) {
             let AnswerletterCount = countOccurances(letter, answerLetters);
             let GuessletterCount = countOccurances(letter, guessLetters);
             let doubleLetterCheck = countOccurances(letter, (guessLetters.slice(0, letterIndex + 1)));
             if (GuessletterCount <= AnswerletterCount) {
                 colorGuessLetter(letterIndex, yellowTile);
-            } else if (guessLetters[answerLetters.indexOf(letter)] === letter) {
-                colorGuessLetter(letterIndex, greyTile);
+                screenKeyboardShade(letter, yellowTile);
+            // } else if (guessLetters[answerLetters.indexOf(letter)] === letter) {
+            //     colorGuessLetter(letterIndex, greyTile);
             } else if (doubleLetterCheck <= AnswerletterCount) {
                 colorGuessLetter(letterIndex, greyTile);
+                screenKeyboardShade(letter);
             } else {
                 colorGuessLetter(letterIndex, yellowTile);
+                screenKeyboardShade(letter);
+                screenKeyboardShade(letter);
             }
         } else {
             colorGuessLetter(letterIndex, greyTile);
-            screenKeyboardShade(letter);
+            screenKeyboardShade(letter, greyTile);
         }
     }
 };
@@ -120,10 +134,10 @@ function countOccurances(letter, arrayOfLetters) {
     }
     return freq;
 }
-function screenKeyboardShade(letter) {
+function screenKeyboardShade(letter, color) {
     let keyboardButtons = Array.from(document.querySelectorAll(".keyboard__key"))
                             .find(item => item.textContent === letter)
-    keyboardButtons.style.cssText = `background: ${greyTile}; color: white`;
+    keyboardButtons.style.cssText = `background: ${color}; color: white`;
 }
 // keyboard //
 const Keyboard = {
