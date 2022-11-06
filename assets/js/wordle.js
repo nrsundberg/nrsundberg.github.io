@@ -1,6 +1,5 @@
-// screenkeyboard don't change from green back and not from yellow to grey
 // variables //
-let [gameWon, guess, guessAttempt, words, answers, answer] = ['no', ``, 0, Array(), Array(), ``];
+let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiveGuesses] = ['no', ``, 0, Array(), Array(), ``, Array(), Array()];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelector(".help-question-mark")];
 // load files //
@@ -12,6 +11,9 @@ d3.csv("/assets/csv/answers.csv", function(data) {
 d3.csv("/assets/csv/words_dictionary.csv", function(data) {
     words.push(data.columns);
     words = words[0];
+    possibleWordsRanked = guessOptimization(words);
+    topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
+    console.log(topFiveGuesses);
 });
 // event listeners //
 newGameButton.addEventListener("click", newGame);
@@ -58,6 +60,9 @@ function flushGuess() {
     if (guess.length === 5 && words.includes(guess)) {
         colorLetterTiles(guess);
         guessAttempt ++;
+        possibleWordsRanked = guessOptimization(possibleWords);
+        topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
+        console.log(topFiveGuesses);
         if (guessAttempt === 6 && guess != answer) {
             // code to pop up correct answer
             const answerBox = document.querySelector(".answer-pop-up");
@@ -69,7 +74,10 @@ function flushGuess() {
         gameBoardRows[guessAttempt].classList.add("apply-shake");
     }
 };
+let [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
 function colorLetterTiles(guess) {
+    let possibleWordsList = Object.keys(possibleWordsRanked);
+    let listOfWordsRefined = Array();
     guess = guess.toLowerCase();
     let guessLetters = guess.split("");
     let answerLetters = answer.split("")
@@ -86,7 +94,17 @@ function colorLetterTiles(guess) {
         if (letter === answerLetters[letterIndex]) {
             colorGuessLetter(letterIndex, greenTile);
             screenKeyboardShade(letter, greenTile);
+            if (letter in lettersInPosition) { 
+                lettersInPosition[letter].push(letterIndex);
+            } else {
+                lettersInPosition[letter] = [letterIndex];
+            }
         } else if (answerLetters.includes(letter)) {
+            if (letter in lettersNotInPosition) { 
+                lettersNotInPosition[letter].push(letterIndex);
+            } else {
+                lettersNotInPosition[letter] = [letterIndex];
+            }
             let AnswerletterCount = countOccurances(letter, answerLetters);
             let GuessletterCount = countOccurances(letter, guessLetters);
             let doubleLetterCheck = countOccurances(letter, (guessLetters.slice(0, letterIndex + 1)));
@@ -103,8 +121,57 @@ function colorLetterTiles(guess) {
         } else {
             colorGuessLetter(letterIndex, greyTile);
             screenKeyboardShade(letter, greyTile);
+            lettersNotInWord.push(letter)
         }
     }
+    for (let z = 0; z < possibleWordsList.length; z++) {
+        let breakWord = 'no';
+        for (let a = 0; a < lettersNotInWord.length; a++) {
+            if (possibleWordsList[z].includes(lettersNotInWord[a])) {
+                breakWord = 'yes';
+            }  
+        }
+        let notInPos = Object.keys(lettersNotInPosition);
+        if (breakWord === 'yes') {
+            continue;
+        }
+        for (let b = 0; b < notInPos.length; b++) {
+            if (breakWord === 'yes') {
+                break;
+            } else if (possibleWordsList[z].includes(notInPos[b]) === false) {
+                breakWord = 'yes';
+                break;
+            }
+            let val = lettersNotInPosition[notInPos[b]]
+            for (let c = 0; c < val.length; c++) {
+                if (possibleWordsList[z][val[c]] === notInPos[b]) {
+                    breakWord = 'yes';
+                    break;
+                }
+            }
+        }
+        if (breakWord === 'yes') {
+            continue;
+        }
+        let InPos = Object.keys(lettersInPosition);
+        for (let d = 0; d < InPos.length; d++) {
+            if (breakWord === 'yes') {
+                break;
+            }
+            let val = lettersInPosition[InPos[d]]
+            for (let e = 0; e < val.length; e++) {
+                if (possibleWordsList[z][val[e]] != notInPos[d]) {
+                    breakWord = 'yes';
+                    break;
+                }
+            }
+        }
+        if (breakWord === 'yes') {
+            continue;
+        }
+        listOfWordsRefined.push(possibleWordsList[z]);
+    }
+    possibleWords = listOfWordsRefined;
 };
 function colorGuessLetter(letterIndex, color, letterColor = 'white') {
     letterTiles[guessAttempt * 5 + letterIndex].style.cssText = `background: ${color}; color: ${letterColor}; border: ${color}`;
@@ -131,6 +198,9 @@ function newGame() {
         keyToChange.style.background = lightGrey;
     const answerBox = document.querySelector(".answer-pop-up");
     answerBox.style.cssText = `display: none;`;
+    possibleWordsRanked = guessOptimization(words);
+    topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
+    [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
     });
 }
 function countOccurances(letter, arrayOfLetters) {
@@ -296,4 +366,48 @@ const Keyboard = {
         this.eventHandlers.oninput = oninput;
         this.eventHandlers.onclose = onclose;
     }
+};
+
+// guess optimization
+let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
+let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
+let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
+let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
+
+function guessOptimization(wordsList){ 
+    let possibleGuesses = wordsList;
+    for (word in possibleGuesses) {
+        let wordSplit = possibleGuesses[word].split("");
+        for (letter in wordSplit) {
+            letterList[letter].push(wordSplit[letter]);
+        }
+    }
+    let [letterOneUnique, letterTwoUnique, letterThreeUnique, letterFourUnique, letterFiveUnique] = [Array.from(new Set(letterOne)), Array.from(new Set(letterTwo)), Array.from(new Set(letterThree)), Array.from(new Set(letterFour)), Array.from(new Set(letterFive))]
+    let uniqueList = [letterOneUnique, letterTwoUnique, letterThreeUnique, letterFourUnique, letterFiveUnique]
+    for (list in scoredList) {
+        let letterString = letterList[list].join('');
+        for (letter in uniqueList[list]) {
+            let letterInList = uniqueList[list][letter]
+            let regex =  new RegExp(letterInList,'g');
+            let occurancesLetter = letterString.match(regex).length;
+            let objectToBeAssigned = {};
+            objectToBeAssigned[letterInList] = occurancesLetter
+            Object.assign(scoredList[list], objectToBeAssigned);
+        }
+    } 
+    let possibleWordsRanked1 = {};
+    for (word in possibleGuesses) {
+        let wordSplit = possibleGuesses[word].split("");
+        let wordScore = 0;
+        for (let i = 0; i < 5; i++) {
+            wordScore += scoredList[i][wordSplit[i]];
+            if (i === 4) {
+                let objectToBeAssigned = {};
+                objectToBeAssigned[possibleGuesses[word]] = wordScore;
+                Object.assign(possibleWordsRanked1, objectToBeAssigned);
+            }
+        }
+
+    }
+    return possibleWordsRanked1;
 };
