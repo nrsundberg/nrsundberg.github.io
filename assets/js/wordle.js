@@ -20,7 +20,9 @@ helpButton.addEventListener("click", function() {
     popUp.style.cssText = `display: block`;
 })
 const popUpClose = document.querySelector(".leave-pop-up")
-popUpClose.addEventListener("click", function(closeWindow) {
+popUpClose.addEventListener("click", function() {
+    const answerBox = document.querySelector(".answer-pop-up");
+    answerBox.style.cssText = `display: none;`;
     const popUp = document.querySelector(".pop-up-full");
     popUp.style.cssText = `display: none`;
 })
