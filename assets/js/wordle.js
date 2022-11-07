@@ -5,16 +5,22 @@
 let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiveGuesses] = ['no', ``, 0, Array(), Array(), ``, Array(), Array()];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 let doubleLetterList = Array();
+let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
+let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
+let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
+let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
+
 const colors = {
     green: `#538d4e`,
     grey: `#3a3a3c`,
     yellow: `#b59f3b`,
     lightGrey: `#83838b`
 };
-const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelector(".help-question-mark")];
+const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelectorAll(".help-question-mark")];
 const wordSuggestions = document.querySelectorAll(".word-suggestions");
 const totalWords = document.getElementById("total-words");
-
+const guessSuggestions = document.querySelector(".guess-suggestions");
+let [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
 // load files //
 d3.csv("/assets/csv/answers.csv", function(data) {
     answers.push(data.columns);
@@ -32,18 +38,30 @@ d3.csv("/assets/csv/words_dictionary.csv", function(data) {
     })
 });
 // event listeners //
+guessSuggestions.addEventListener("click", function() {
+    const popUp = document.querySelector(".pop-up-full");
+    popUp.style.cssText = `display: none`;
+    const answerBox = document.querySelector(".answer-pop-up");
+    answerBox.style.cssText = `display: none;`;
+    const wordSugBox = document.querySelector(".pop-up-suggestions");
+    wordSugBox.style.cssText = `display: block;`;
+})
 newGameButton.addEventListener("click", newGame);
-helpButton.addEventListener("click", function() {
+helpButton[1].addEventListener("click", function() {
     const answerBox = document.querySelector(".answer-pop-up");
     answerBox.style.cssText = `display: none;`;
     const popUp = document.querySelector(".pop-up-full");
     popUp.style.cssText = `display: block`;
 })
-const popUpClose = document.querySelector(".leave-pop-up")
-popUpClose.addEventListener("click", function() {
-    const popUp = document.querySelector(".pop-up-full");
-    popUp.style.cssText = `display: none`;
-})
+const popUpClose = document.querySelectorAll(".leave-pop-up")
+document.querySelectorAll('.leave-pop-up').forEach(xButton => {
+    xButton.addEventListener('click', event => {
+        const popUp = document.querySelector(".pop-up-full");
+        popUp.style.cssText = `display: none`;
+        const wordSugBox = document.querySelector(".pop-up-suggestions");
+        wordSugBox.style.cssText = `display: none;`;
+    });
+});
 document.addEventListener("keyup", function(keyPressEvent) {
     const pressedKey = keyPressEvent.code;
     const typedLetter = keyPressEvent.key;
@@ -216,7 +234,7 @@ function checkYellow(guess, answer, index, letter) {
     }
     return false;
 };
-let [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
+
 function letterPosition(char, index, lettersList) {
     if (letter in lettersList) { 
         lettersList[char].push(index);
@@ -429,10 +447,6 @@ const Keyboard = {
 };
 
 // guess optimization
-let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
-let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
-let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
-let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
 
 function guessOptimization(wordsList){ 
     let possibleGuesses = wordsList;
