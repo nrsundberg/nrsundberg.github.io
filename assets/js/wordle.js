@@ -12,6 +12,9 @@ const colors = {
     lightGrey: `#83838b`
 };
 const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelector(".help-question-mark")];
+const wordSuggestions = document.querySelectorAll(".word-suggestions");
+const totalWords = document.getElementById("total-words");
+
 // load files //
 d3.csv("/assets/csv/answers.csv", function(data) {
     answers.push(data.columns);
@@ -23,7 +26,10 @@ d3.csv("/assets/csv/words_dictionary.csv", function(data) {
     words = words[0];
     possibleWordsRanked = guessOptimization(words);
     topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
-    console.log(topFiveGuesses);
+    totalWords.innerText = (Object.keys(possibleWordsRanked).length);
+    wordSuggestions.forEach((listElement, index) => {
+        listElement.innerText = topFiveGuesses[index][0];
+    })
 });
 // event listeners //
 newGameButton.addEventListener("click", newGame);
@@ -76,8 +82,16 @@ function flushGuess() {
         possibleWords = refinePossibleWords(possibleWordsRanked);
         guessAttempt ++;
         possibleWordsRanked = guessOptimization(possibleWords);
+        totalWords.innerText = (possibleWords.length);
         let topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
-        console.log(topFiveGuesses);
+        wordSuggestions.forEach((listElement, index) => {
+            const textToFill = topFiveGuesses[index]?.[0];
+            if (textToFill === undefined) {
+                listElement.innerText = ''    
+            } else {
+                listElement.innerText = textToFill;
+            }
+        })
         if (guessAttempt === 6 && guess != answer) {
             // code to pop up correct answer
             const answerBox = document.querySelector(".answer-pop-up");
@@ -244,7 +258,10 @@ function newGame() {
     lettersInPosition = {};
     lettersNotInPosition = {};
     lettersNotInWord = Array();
-    console.log(topFiveGuesses);
+    totalWords.innerText = (possibleWords.length);
+    wordSuggestions.forEach((listElement, index) => {
+        listElement.innerText = topFiveGuesses[index][0];
+    });
 };
 function countOccurances(letter, arrayOfLetters) {
     let freq = 0;

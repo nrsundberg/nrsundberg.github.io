@@ -119,6 +119,24 @@ div#game-board:focus-visible {
     width: 250px;
     margin-bottom: 0;
 }
+.pop-up-suggestions {
+    /* z-index: 10; */
+    font-size: 20px;
+    color: var(--raisin-black);
+    border-radius: 30px;
+    /* display: none; */
+    margin-top: 20vh;
+    margin-left: 70vw;
+    padding: 10px 25px;
+    height: 400px;
+    width: 400px;
+}
+#total-words {
+    color: var(--raisin-black);
+}
+.pop-up-suggestions li {
+    font-size: 30px;
+}
 .answer-pop-up {
     display: none;
     z-index: 10;
@@ -262,6 +280,9 @@ footer {
     width: 36%;
     max-width: 500px;
 }
+.guess-interaction {
+    display: none;
+}
 
 @media only screen and (max-width: 500px) {
     :root {
@@ -325,6 +346,7 @@ footer {
         margin-right: 2vw;
         width: 90px;
         font-size: 17px;
+        height: 55px;
 
     }
     .help-question-mark {
@@ -356,5 +378,8 @@ footer {
     .pop-up-full img {
         width: 250px;
         margin-bottom: 0;
+    }
+    .pop-up-suggestions {
+        display: none;
     }
 }
