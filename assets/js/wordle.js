@@ -198,9 +198,9 @@ function newGame() {
         keyToChange.style.background = lightGrey;
     const answerBox = document.querySelector(".answer-pop-up");
     answerBox.style.cssText = `display: none;`;
-    possibleWordsRanked = guessOptimization(words);
-    topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
-    [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
+    // possibleWordsRanked = guessOptimization(words);
+    // topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
+    // [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
     });
 }
 function countOccurances(letter, arrayOfLetters) {
