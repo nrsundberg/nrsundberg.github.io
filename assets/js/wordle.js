@@ -130,6 +130,14 @@ function refinePossibleWords(wordsObject) {
         const nonletterInWord = [...word].some(r => lettersNotInWord.includes(r));
         // undefined continues
         let notInPositionKeys = Object.keys(lettersNotInPosition)
+        function lettersInAnswerNotWord() {
+            let combinedLetters = Object.keys(lettersInPosition).concat(Object.keys(lettersNotInPosition))
+            const notInWord = [...word].some(r => combinedLetters.includes(r));
+            if (!notInWord) {
+                return false;
+            }
+        }
+        const notIncluding = lettersInAnswerNotWord();
         function notIn() {
             for (let i = 0; i < notInPositionKeys.length; i++) {
                 let notInPositionIndex = lettersNotInPosition[notInPositionKeys[i]]
@@ -154,7 +162,7 @@ function refinePossibleWords(wordsObject) {
             }
         };
         const inPosition = inPositionWord();
-        if ((!nonletterInWord) && notInPosition === undefined && inPosition === undefined) {
+        if ((!nonletterInWord) && notInPosition === undefined && inPosition === undefined && notIncluding === undefined) {
             listOfWordsRefined.push(word);
         }
     });
