@@ -180,9 +180,13 @@ function checkYellow(guess, answer, index, letter) {
     let GuessletterCount = countOccurances(letter, [...guess]);
     let doubleLetterCheck = countOccurances(letter, ([...guess].slice(0, index + 1)));
     // double letter not correct
-    if (GuessletterCount <= AnswerletterCount || doubleLetterCheck <= AnswerletterCount ) {
+    if (GuessletterCount <= AnswerletterCount) {
         return true;
-    };
+    } else if ([...guess][[...answer].indexOf(letter)] === letter ) {
+        return false;
+    } else if (doubleLetterCheck <= AnswerletterCount ) {
+        return true;
+    }
     return false;
 };
 
