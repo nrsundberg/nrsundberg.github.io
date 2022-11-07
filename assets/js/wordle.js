@@ -4,12 +4,13 @@
 // use class inserting to paint letters colors
 let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiveGuesses] = ['no', ``, 0, Array(), Array(), ``, Array(), Array()];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
+let doubleLetterList = Array();
 const colors = {
     green: `#538d4e`,
     grey: `#3a3a3c`,
     yellow: `#b59f3b`,
     lightGrey: `#83838b`
-}
+};
 const [letterTiles, newGameButton, gameBoardRows, helpButton]  = [document.querySelectorAll(".letter"), document.getElementById("new-game-btn"), document.querySelectorAll(".row"), document.querySelector(".help-question-mark")];
 // load files //
 d3.csv("/assets/csv/answers.csv", function(data) {
@@ -92,6 +93,12 @@ function flushGuess() {
 function colorLetterTiles(guess) {
     guess = guess.toLowerCase();
     [...guess].forEach((char, index) => {
+        const letterOcurr = countOccurances(char, [...guess]);
+        const answerOcurr = countOccurances(char, [...answer]);
+        const doubleLetter = letterOcurr > 1 && answerOcurr > 1;
+        if (doubleLetter) {
+            doubleLetterList.push(char);
+        };
         const isInWord = [...answer].includes(char);
         const isInPosition = [...answer][index] === char;
   
@@ -127,6 +134,10 @@ function refinePossibleWords(wordsObject) {
     let possibleWordsList = Object.keys(wordsObject);
     let listOfWordsRefined = Array();
     possibleWordsList.forEach((word) => {
+        let passDoubleLetter = true;
+        if (doubleLetterList.length > 1) {
+            passDoubleLetter = countOccurances(doubleLetterList[0], [...word]) > 1;
+        }
         // false continues
         const nonletterInWord = [...word].some(r => lettersNotInWord.includes(r));
         // undefined continues
@@ -134,13 +145,15 @@ function refinePossibleWords(wordsObject) {
         function lettersInAnswerNotWord() {
             let combinedLetters = Object.keys(lettersInPosition).concat(Object.keys(lettersNotInPosition))
             if (combinedLetters.length === 0) {
-                return;
+                return true;
             }
-            const notInWord = [...word].some(r => combinedLetters.includes(r));
-            if (!notInWord) {
+            const notInWord = combinedLetters.every(r => [...word].includes(r));
+            if (notInWord) {
+                return true;
+            } else {
                 return false;
             }
-        }
+        };
         const notIncluding = lettersInAnswerNotWord?.();
 
         function notIn() {
@@ -168,7 +181,7 @@ function refinePossibleWords(wordsObject) {
         };
         const inPosition = inPositionWord?.();
 
-        if ((!nonletterInWord) && notInPosition === undefined && inPosition === undefined && notIncluding === undefined) {
+        if ((!nonletterInWord) && passDoubleLetter && notInPosition === undefined && inPosition === undefined && notIncluding) {
             listOfWordsRefined.push(word);
         }
     });
@@ -189,8 +202,6 @@ function checkYellow(guess, answer, index, letter) {
     }
     return false;
 };
-
-
 let [lettersInPosition, lettersNotInPosition, lettersNotInWord] = [{}, {}, Array()]
 function letterPosition(char, index, lettersList) {
     if (letter in lettersList) { 
