@@ -1,7 +1,4 @@
 // variables //
-//  reduce callback circling and build elements through js
-// use forEach() to iterate over guess only once
-// use class inserting to paint letters colors
 let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiveGuesses] = ['no', ``, 0, Array(), Array(), ``, Array(), Array()];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 let doubleLetterList = Array();
