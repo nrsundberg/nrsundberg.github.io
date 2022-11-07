@@ -111,6 +111,7 @@ function colorLetterTiles(guess) {
                 letterPosition(char, index, lettersNotInPosition);
                 return;
             }
+            letterPosition(char, index, lettersNotInPosition);
             colorGuessLetter(index, colors['grey']);
             return;
         }
@@ -125,19 +126,23 @@ function colorLetterTiles(guess) {
 function refinePossibleWords(wordsObject) {
     let possibleWordsList = Object.keys(wordsObject);
     let listOfWordsRefined = Array();
-    possibleWordsList.forEach((word, index) => {
+    possibleWordsList.forEach((word) => {
         // false continues
         const nonletterInWord = [...word].some(r => lettersNotInWord.includes(r));
         // undefined continues
-        let notInPositionKeys = Object.keys(lettersNotInPosition)
+        let notInPositionKeys = Object?.keys(lettersNotInPosition)
         function lettersInAnswerNotWord() {
             let combinedLetters = Object.keys(lettersInPosition).concat(Object.keys(lettersNotInPosition))
+            if (combinedLetters.length === 0) {
+                return;
+            }
             const notInWord = [...word].some(r => combinedLetters.includes(r));
             if (!notInWord) {
                 return false;
             }
         }
-        const notIncluding = lettersInAnswerNotWord();
+        const notIncluding = lettersInAnswerNotWord?.();
+
         function notIn() {
             for (let i = 0; i < notInPositionKeys.length; i++) {
                 let notInPositionIndex = lettersNotInPosition[notInPositionKeys[i]]
@@ -148,9 +153,9 @@ function refinePossibleWords(wordsObject) {
                 }
             }
         };
-        const notInPosition = notIn();
+        const notInPosition = notIn?.();
 
-        let inPositionKeys = Object.keys(lettersInPosition)
+        let inPositionKeys = Object?.keys(lettersInPosition);
         function inPositionWord() {
             for (let i = 0; i < inPositionKeys.length; i++) {
                 let inPositionIndex = lettersInPosition[inPositionKeys[i]]
@@ -161,7 +166,8 @@ function refinePossibleWords(wordsObject) {
                 }
             }
         };
-        const inPosition = inPositionWord();
+        const inPosition = inPositionWord?.();
+
         if ((!nonletterInWord) && notInPosition === undefined && inPosition === undefined && notIncluding === undefined) {
             listOfWordsRefined.push(word);
         }
@@ -173,7 +179,8 @@ function checkYellow(guess, answer, index, letter) {
     let AnswerletterCount = countOccurances(letter, [...answer]);
     let GuessletterCount = countOccurances(letter, [...guess]);
     let doubleLetterCheck = countOccurances(letter, ([...guess].slice(0, index + 1)));
-    if (GuessletterCount <= AnswerletterCount || doubleLetterCheck <= AnswerletterCount) {
+    // double letter not correct
+    if (GuessletterCount <= AnswerletterCount || doubleLetterCheck <= AnswerletterCount ) {
         return true;
     };
     return false;
