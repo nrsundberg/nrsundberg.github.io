@@ -3,9 +3,7 @@ let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiv
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 let doubleLetterList = Array();
 let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
-let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
 let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
-let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
 
 const colors = {
     green: `#538d4e`,
@@ -447,9 +445,11 @@ const Keyboard = {
 // guess optimization
 
 function guessOptimization(wordsList){ 
+    let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
+    let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
+    let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
+    let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
     let possibleGuesses = wordsList;
-    [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
-    [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
     for (word in possibleGuesses) {
         let wordSplit = possibleGuesses[word].split("");
         for (letter in wordSplit) {
