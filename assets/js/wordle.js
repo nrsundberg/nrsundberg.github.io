@@ -273,7 +273,7 @@ function newGame() {
     lettersInPosition = {};
     lettersNotInPosition = {};
     lettersNotInWord = Array();
-    totalWords.innerText = (possibleWords.length);
+    totalWords.innerText = (Object.keys(possibleWordsRanked).length);
     wordSuggestions.forEach((listElement, index) => {
         listElement.innerText = topFiveGuesses[index][0];
     });
