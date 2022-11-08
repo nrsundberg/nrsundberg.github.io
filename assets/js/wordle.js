@@ -269,7 +269,7 @@ function newGame() {
     const answerBox = document.querySelector(".answer-pop-up");
     answerBox.style.cssText = `display: none;`;
     possibleWordsRanked = guessOptimization(words);
-    possibleWords = words
+    possibleWords = words;
     topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
     lettersInPosition = {};
     lettersNotInPosition = {};
@@ -448,6 +448,8 @@ const Keyboard = {
 
 function guessOptimization(wordsList){ 
     let possibleGuesses = wordsList;
+    [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
+    [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
     for (word in possibleGuesses) {
         let wordSplit = possibleGuesses[word].split("");
         for (letter in wordSplit) {
