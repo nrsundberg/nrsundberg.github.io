@@ -3,7 +3,6 @@ let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiv
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 let doubleLetterList = Array();
 
-
 const colors = {
     green: `#538d4e`,
     grey: `#3a3a3c`,
@@ -271,6 +270,7 @@ function newGame() {
     lettersInPosition = {};
     lettersNotInPosition = {};
     lettersNotInWord = Array();
+    doubleLetterList = Array();
     totalWords.innerText = (Object.keys(possibleWordsRanked).length);
     wordSuggestions.forEach((listElement, index) => {
         listElement.innerText = topFiveGuesses[index][0];
