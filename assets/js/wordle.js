@@ -269,6 +269,7 @@ function newGame() {
     const answerBox = document.querySelector(".answer-pop-up");
     answerBox.style.cssText = `display: none;`;
     possibleWordsRanked = guessOptimization(words);
+    possibleWords = words
     topFiveGuesses = Object.entries(possibleWordsRanked).sort((a,b) => b[1]-a[1]).slice(0,5);
     lettersInPosition = {};
     lettersNotInPosition = {};
