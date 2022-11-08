@@ -2,8 +2,7 @@
 let [gameWon, guess, guessAttempt, words, answers, answer, possibleWords, topFiveGuesses] = ['no', ``, 0, Array(), Array(), ``, Array(), Array()];
 let [greenTile, greyTile, yellowTile, lightGrey] = [`#538d4e`, `#3a3a3c`, `#b59f3b`, `#83838b`];
 let doubleLetterList = Array();
-let [letterOne, letterTwo, letterThree, letterFour, letterFive] = [Array(), Array(), Array(), Array(), Array()];
-let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
+
 
 const colors = {
     green: `#538d4e`,
@@ -449,9 +448,9 @@ function guessOptimization(wordsList){
     let [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored] = [{}, {}, {}, {}, {}];
     let scoredList = [letterOneScored, letterTwoScored, letterThreeScored, letterFourScored, letterFiveScored];
     let letterList = [letterOne, letterTwo, letterThree, letterFour, letterFive];
-    let possibleGuesses = wordsList;
-    for (word in possibleGuesses) {
-        let wordSplit = possibleGuesses[word].split("");
+    let possibleGuessesList = wordsList;
+    for (word in possibleGuessesList) {
+        let wordSplit = possibleGuessesList[word].split("");
         for (letter in wordSplit) {
             letterList[letter].push(wordSplit[letter]);
         }
@@ -470,14 +469,14 @@ function guessOptimization(wordsList){
         }
     } 
     let possibleWordsRanked1 = {};
-    for (word in possibleGuesses) {
-        let wordSplit = possibleGuesses[word].split("");
+    for (word in possibleGuessesList) {
+        let wordSplit = possibleGuessesList[word].split("");
         let wordScore = 0;
         for (let i = 0; i < 5; i++) {
             wordScore += scoredList[i][wordSplit[i]];
             if (i === 4) {
                 let objectToBeAssigned = {};
-                objectToBeAssigned[possibleGuesses[word]] = wordScore;
+                objectToBeAssigned[possibleGuessesList[word]] = wordScore;
                 Object.assign(possibleWordsRanked1, objectToBeAssigned);
             }
         }
